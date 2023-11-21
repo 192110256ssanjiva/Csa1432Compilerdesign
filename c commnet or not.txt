@@ -30,3 +30,12 @@ int main()
 	}
 }
 }
+
+output:
+enter the comment:
+//hello im doing c program
+it is comment.
+
+enter the comment:
+/*hi
+it is not a comment.
