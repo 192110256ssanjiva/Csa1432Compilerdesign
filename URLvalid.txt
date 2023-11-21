@@ -1,37 +1,33 @@
 %%
-[\t ]+ ;
-[0-9]+|[0-9]*\.[0-9]+ { printf("\n%s is NUMBER", yytext);}
-#.* { printf("\n%s is COMMENT", yytext);}
-[a-zA-Z]+ { printf("\n%s is WORD", yytext);}
-\n { ECHO;}
-%%
-int main()
-{
-	while( yylex());
-}
+((http)|(ftp))s?:\/\/[a-zA-Z0-9](.[a-z])+(.[a-zA-Z0-9+=?]*)* {printf("\nURL Valid\n");}
 
-int yywrap( )
+.+ {printf("\nURL Invalid\n");}
+
+%%
+void main()
 {
-	return 1;
+	printf("\nEnter URL : ");
+	yylex();
+	printf("\n");
+}
+int yywrap()
+{
 }
 
 Output:
 
-G:\lex>flex numbers_words.l
+G:\lex>flex url.l
 
 G:\lex>gcc lex.yy.c
 
 G:\lex>a.exe
-Variables A and B contains 10 and 20 respectively
 
-Variables is WORD
-A is WORD
-and is WORD
-B is WORD
-contains is WORD
-10 is NUMBER
-and is WORD
-20 is NUMBER
-respectively is WORD
+Enter URL : https:\\www.sse.in
+
+URL Invalid
+
+https://www.sse.in
+
+URL Valid
 
 G:\lex>
